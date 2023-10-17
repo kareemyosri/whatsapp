@@ -25,7 +25,8 @@ class CustomListViewToShowAllMessaage extends StatelessWidget {
         .snapshots();
         
 
-    return StreamBuilder<QuerySnapshot>(
+    return
+     StreamBuilder<QuerySnapshot>(
         stream: message,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {
@@ -45,6 +46,8 @@ class CustomListViewToShowAllMessaage extends StatelessWidget {
             return const Loading();
           }
         });
+ 
+ 
   }
 
   Column _buildListView(List<MessageModl> allMessage) {

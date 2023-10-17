@@ -1,8 +1,8 @@
 
 import 'package:flutter/widgets.dart';
+import 'package:whatsapp/home/screens/widget/list_tile_chat.dart';
 
 import '../../../profile/data/model/profile_model.dart';
-import 'list_tile_chat.dart';
 
 class CustomListViewToShowAllUser extends StatelessWidget {
   const CustomListViewToShowAllUser({

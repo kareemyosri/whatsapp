@@ -14,7 +14,8 @@ import '../../util/widget/loading.dart';
 import '../manager/cubit/profile_cubit.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  const ProfileScreen({super.key, required this.phoneNumber});
+  final String phoneNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +71,7 @@ class ProfileScreen extends StatelessWidget {
                     if (namecontroller.text.isNotEmpty) {
                       await BlocProvider.of<ProfileCubit>(context)
                           .updateProfile(
+                            phoneNumber: phoneNumber,
                               name: namecontroller.text,
                               id: FirebaseAuth.instance.currentUser!.uid);
                     }

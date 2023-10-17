@@ -6,10 +6,10 @@ import 'package:either_dart/src/either.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:whatsapp/profile/data/repo/home_repo.dart';
 
 import '../../../util/app_const.dart';
 import '../../../util/error.dart';
-import 'home_repo.dart';
 
 class HomeRepoImple implements HomeRepo {
   CollectionReference profile =
@@ -18,7 +18,7 @@ class HomeRepoImple implements HomeRepo {
  
   @override
   Future<Either<Failuer, bool >> storedateFirebase(
-      {required String name, required String id, File? filephoto}) async {
+      {required String name, required String id,required String phoneNumber, File? filephoto}) async {
     try {
       String? urlImage;
       if (filephoto != null) {
@@ -26,7 +26,7 @@ class HomeRepoImple implements HomeRepo {
         result.fold((left) {
           return Left(ServerFailuer(left.toString()));
         }, (right) => urlImage = right);
-        var resultaddDate =  _addDataInFirebase(name, id, urlImage!);
+        var resultaddDate =  _addDataInFirebase(name, id, urlImage!,phoneNumber);
         resultaddDate.fold(
           (left) {
             return Left(ServerFailuer(left.erroMessage));
@@ -35,7 +35,7 @@ class HomeRepoImple implements HomeRepo {
         );
       } else {
         var resultaddDate =  _addDataInFirebase(name, id,
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFFRvDjuy8BDiyWROIuIhgtHgneqizbYabMA&usqp=CAU');
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFFRvDjuy8BDiyWROIuIhgtHgneqizbYabMA&usqp=CAU',phoneNumber);
 
         resultaddDate.fold(
           (left) {
@@ -54,13 +54,14 @@ class HomeRepoImple implements HomeRepo {
 
 
 Either<Failuer, bool> _addDataInFirebase(
-    String name, String id, String urlImage)  {
+    String name, String id, String urlImage,String phoneNumber)  {
 
   try {
      profile.add({
       'name': name,
       'id': id,
-      'photo': urlImage
+      'photo': urlImage,
+      "phoneNumber":phoneNumber
     });
     return const Right(true);
   } catch (error) {
@@ -72,7 +73,7 @@ Either<Failuer, bool> _addDataInFirebase(
   Future<Either<Failuer, String>> _uploadImage(File photo) async {
     final imagNmae = basename(photo.path);
 
-    var mountainsRef = FirebaseStorage.instance.ref(imagNmae);
+    var mountainsRef = FirebaseStorage.instance.ref('profile/$imagNmae');
     try {
       await mountainsRef.putFile(photo);
       return Right(await mountainsRef.getDownloadURL());

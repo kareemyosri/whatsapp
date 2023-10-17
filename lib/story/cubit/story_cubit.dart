@@ -1,7 +1,6 @@
-import 'dart:io';
-
 import 'package:bloc/bloc.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,57 +8,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:story_maker/story_maker.dart';
-import 'package:video_player/video_player.dart';
 
 part 'story_state.dart';
 
 class StoryCubit extends Cubit<StoryState> {
   StoryCubit() : super(StoryInitial());
+  int a = 1;
 
-  static StoryCubit get(context)=>BlocProvider.of(context);
-  // PlatformFile? pickedFile;
-  //
-  // VideoPlayerController? videoController;
-  // Future<void> pickMedia(
-  // ) async {
-  //   emit(StoryLoading());
-  //   var status = await Permission.storage.status;
-  //   if (!status.isGranted) {
-  //     await Permission.storage.request();
-  //     status = await Permission.storage.status;
-  //     if (!status.isGranted) {
-  //       emit(StoryError());
-  //       // Handle permission denied
-  //       return;
-  //     }
-  //   }
-  //
-  //   FilePickerResult? result = await FilePicker.platform.pickFiles(
-  //     type: FileType.custom,
-  //     allowedExtensions: ['jpg', 'jpeg', 'png'],
-  //   );
-  //
-  //   if (result == null) {
-  //     return;
-  //   }
-  //
-  //   final path = result.files.single.path;
-  //   final isVideo = path?.toLowerCase().endsWith('.mp4');
-  //   pickedFile = result.files.single;
-  //
-  //   if (isVideo!) {
-  //     // Picked a video
-  //     //videoController?.dispose();
-  //     videoController = VideoPlayerController.file(File(path!))
-  //       ..initialize().then((_) {
-  //           // Update the _pickedFile variable to the video file
-  //           pickedFile = result.files.single;
-  //
-  //       });
-  //   }
-  //   emit(StorySuccess());
-  // }
-
+  static StoryCubit get(context) => BlocProvider.of(context);
 
   Future<String> uploadImage(BuildContext context) async {
     emit(StoryLoading());
@@ -89,29 +45,49 @@ class StoryCubit extends Cubit<StoryState> {
     final downloadURL = await ref.getDownloadURL();
     print(downloadURL);
     emit(StorySuccess());
-
-
-    return downloadURL;
+    uploadStoryInFireStore(
+    //    date: DateTime.now().toString(),
+        urlImage: downloadURL,
+        stroyType: 'image',
+        name: 'mohamed');
+    return '';
   }
 
+  Future<void> uploadStoryInFireStore(
+      {required String name,
+      required String urlImage,
+      required String stroyType,
+      //required String date
+      }) async {
+// Create a reference to the Firestore database.
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+// Create a reference to the stories collection.
+    final CollectionReference storiesCollection =
+        firestore.collection('stories');
 
-  // final FirebaseStorage _storage = FirebaseStorage.instance;
-  // Future<void> uploadToFirebase() async {
-  //   if (pickedFile == null) {
-  //     return; // No file to upload
-  //   }
-  //
-  //   final ref = _storage.ref().child('media/${pickedFile!.name}');
-  //   await ref.putFile(File(pickedFile!.path!));
-  //
-  //   // You can now handle the Firebase Storage URL if needed
-  //   final downloadURL = await ref.getDownloadURL();
-  //
-  //
-  //
-  //   print("File uploaded to Firebase Storage: $downloadURL");
-  // }
+// Get the UID of the user for whom you want to create the collection.
+    final String uid = FirebaseAuth.instance.currentUser!.uid;
 
+// Create a reference to the user's stories document.
+    final DocumentReference userStoriesDocument = storiesCollection.doc(uid);
+userStoriesDocument.set({
+  'uid': FirebaseAuth.instance.currentUser!.uid
+});
+// Create a reference to the 1 collection.
+    final CollectionReference storyCollection =
+        userStoriesDocument.collection('1');
 
+// Create a new document in the 1 collection.
+    final DocumentReference storyDocument = storyCollection.doc();
+
+// Set the name of the story.
+    storyDocument.set({
+      "name": name,
+      "storyURL": urlImage,
+      "storyType": stroyType,
+      "date": DateTime.now(),
+      "uid" : FirebaseAuth.instance.currentUser!.uid
+    });
+  }
 }

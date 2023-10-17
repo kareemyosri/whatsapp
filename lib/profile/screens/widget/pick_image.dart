@@ -1,7 +1,7 @@
 import 'dart:io';
 //
 import 'package:flutter/material.dart';
-//import 'package:image_picker/image_picker.dart';
+import 'package:image_picker/image_picker.dart';
 
 class PickImage extends StatefulWidget {
   const PickImage({super.key});
@@ -14,7 +14,7 @@ class _PickImageState extends State<PickImage> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        //onTap: pickimage,
+        onTap: pickimage,
         child: ClipRRect(
             borderRadius: BorderRadius.circular(120),
             child: image == null
@@ -22,14 +22,14 @@ class _PickImageState extends State<PickImage> {
                 : Image.file(image!, height: 120, width: 120)));
   }
 
-  // Future<void> pickimage() async {
-  //   var _image = await ImagePicker().pickImage(source: ImageSource.gallery);
-  //   if (_image != null) {
-  //     setState(() {
-  //       image = File(_image.path);
-  //     });
-  //   }
-  // }
+  Future<void> pickimage() async {
+    var _image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (_image != null) {
+      setState(() {
+        image = File(_image.path);
+      });
+    }
+  }
 }
 
 File? image;

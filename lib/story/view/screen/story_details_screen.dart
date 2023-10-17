@@ -26,64 +26,6 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body:
-      // (widget.type=='text')?
-      // StoryView(
-      //
-      //   storyItems: [
-      //
-      //       StoryItem.text(
-      //         title: widget.imageURL,
-      //         backgroundColor: Colors.blue,
-      //       ),
-      //
-      //
-      //
-      //
-      //   ],
-      //   onStoryShow: (s) {
-      //     print("Showing a story");
-      //   },
-      //   onComplete: () {
-      //     print("Completed a cycle");
-      //   },
-      //   progressPosition: ProgressPosition.top,
-      //   repeat: false,
-      //   controller: storyController,
-      // ) :  (widget.type=='image')?
-      //
-      // StoryView(
-      //
-      //   storyItems: [
-      //
-      //     StoryItem.pageImage(
-      //       url: widget.imageURL,
-      //       caption: "Hello, from the other side2",
-      //       controller: storyController,
-      //     ),
-      //
-      //
-      //   ],
-      //   onStoryShow: (s) {
-      //     print("Showing a story");
-      //   },
-      //   onComplete: () {
-      //     print("Completed a cycle");
-      //   },
-      //   progressPosition: ProgressPosition.top,
-      //   repeat: false,
-      //   controller: storyController,
-      // ) :  StoryView(
-      //
-      //   storyItems: [
-      //
-      //     StoryItem.pageVideo(
-      //       widget.imageURL,
-      //       caption: "Hello, from the other side2",
-      //       controller: storyController,
-      //     ),
-      //
-      //
-      //   ],
       StoryView(
         storyItems: widget.storyItems, controller: storyController,
 
@@ -91,6 +33,7 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
           print("Showing a story");
         },
         onComplete: () {
+       Navigator.pop(context);
           print("Completed a cycle");
         },
         progressPosition: ProgressPosition.top,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../color.dart';
+import 'package:whatsapp/util/color.dart';
 
 class Loading extends StatelessWidget {
   const Loading({super.key});

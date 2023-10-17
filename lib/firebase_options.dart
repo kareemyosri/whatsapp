@@ -54,7 +54,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAiIJSp8XE1XqXBwJ72EOAwODLaUYTB3fw',
-    appId: '1:432209666586:android:2086875075e7e509b9e7a3',
+    appId: '1:432209666586:android:5b9d0157801a1c96b9e7a3',
     messagingSenderId: '432209666586',
     projectId: 'chat-app-39e01',
     storageBucket: 'chat-app-39e01.appspot.com',
@@ -62,19 +62,19 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDjFYic4xx69OKmHzaquMyzWwd6vPjVuP4',
-    appId: '1:432209666586:ios:b7d85680418e886ab9e7a3',
+    appId: '1:432209666586:ios:9a2097342682e4bdb9e7a3',
     messagingSenderId: '432209666586',
     projectId: 'chat-app-39e01',
     storageBucket: 'chat-app-39e01.appspot.com',
-    iosBundleId: 'com.example.whatsapp',
+    iosBundleId: 'com.example.chatApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyDjFYic4xx69OKmHzaquMyzWwd6vPjVuP4',
-    appId: '1:432209666586:ios:68fb4af5c375c46cb9e7a3',
+    appId: '1:432209666586:ios:d1aeb2120063078cb9e7a3',
     messagingSenderId: '432209666586',
     projectId: 'chat-app-39e01',
     storageBucket: 'chat-app-39e01.appspot.com',
-    iosBundleId: 'com.example.whatsapp.RunnerTests',
+    iosBundleId: 'com.example.chatApp.RunnerTests',
   );
 }

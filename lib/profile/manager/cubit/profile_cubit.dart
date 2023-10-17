@@ -14,10 +14,10 @@ class ProfileCubit extends Cubit<ProfileState> {
   final HomeRepoImple _homeRepoImple;
   List<ProfileModel> allUsers = [];
   late ProfileModel myProfile;
-  Future<void> updateProfile({required String name, required String id}) async {
+  Future<void> updateProfile({required String name, required String id,required String phoneNumber}) async {
     emit(StateIsLoading());
     var result = await _homeRepoImple.storedateFirebase(
-        name: name, id: id, filephoto: image);
+        name: name, id: id, filephoto: image,phoneNumber: phoneNumber);
 
     result.fold((left) {
       emit(UpdateProfileIsFailuer(

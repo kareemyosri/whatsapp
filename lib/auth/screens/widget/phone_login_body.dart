@@ -62,7 +62,7 @@ class PhoneLoginScreenBody extends StatelessWidget {
             if (state is PhoneNumberINValid) {
               flutterTost(state.erroeMessage);
             } else if (state is PhoneNumberValid) {
-              Navigator.pushReplacementNamed(context, AppRouter.otpScreen);
+              Navigator.pushReplacementNamed(context, AppRouter.otpScreen,arguments: controller.text);
               controller.clear();
             }
           },

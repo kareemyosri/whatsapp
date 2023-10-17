@@ -5,9 +5,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:whatsapp/shrde/my_shard_prefrence.dart';
-import 'package:whatsapp/story/cubit/story_cubit.dart';
-import 'package:whatsapp/story/view/screen/story_details_screen.dart';
-import 'package:whatsapp/story/view/screen/test.dart';
 import 'package:whatsapp/util/app_router.dart';
 import 'package:whatsapp/util/bloc_observe.dart';
 import 'auth/manager/cubit/phone_auth_cubit.dart';
@@ -39,14 +36,14 @@ class Whatsapp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //FirebaseAuth.instance.currentUser!.displayName.toString();
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (context) => PhoneAuthCubit(),
         ),
-        BlocProvider(
-          create: (context) => StoryCubit(),
-        ),
+       
       ],
       child: ScreenUtilInit(
         designSize:const  Size(360, 690),
@@ -55,9 +52,8 @@ class Whatsapp extends StatelessWidget {
         child: MaterialApp(
         
           debugShowCheckedModeBanner: false,
-          //onGenerateRoute: AppRouter.generateRoute,
-          //initialRoute: initialRoute,
-          home: StoryScreen(),
+          onGenerateRoute: AppRouter.generateRoute,
+          initialRoute: initialRoute,
         ),
       ),
     );

@@ -33,36 +33,36 @@ class _StoryScreenState extends State<StoryScreen> {
       body: Column(
 
         children: [
-          ListTile(
-            leading: const Text('Add Story'),
-            trailing: Center(
-              child: Row(
-                 mainAxisAlignment: MainAxisAlignment.end,
-                // crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  GestureDetector(
-                    onTap: () async{
-
-                      cubit.uploadImage(context);
-
-                    },
-                    child: const Icon(Icons.photo_library_outlined),
-                  ),
-                  const SizedBox(width: 10,),
-                  GestureDetector(
-                    onTap: () async{
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                          StoryTextMakerScreen()
-                      ));
-
-
-                    },
-                    child: const Icon(Icons.edit_outlined),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // ListTile(
+          //   leading: const Text('Add Story'),
+          //   trailing: Center(
+          //     child: Row(
+          //        mainAxisAlignment: MainAxisAlignment.end,
+          //       // crossAxisAlignment: CrossAxisAlignment.end,
+          //       children: [
+          //         GestureDetector(
+          //           onTap: () async{
+          //
+          //             cubit.uploadImage(context);
+          //
+          //           },
+          //           child: const Icon(Icons.photo_library_outlined),
+          //         ),
+          //         const SizedBox(width: 10,),
+          //         GestureDetector(
+          //           onTap: () async{
+          //             Navigator.push(context, MaterialPageRoute(builder: (context)=>
+          //                 StoryTextMakerScreen()
+          //             ));
+          //
+          //
+          //           },
+          //           child: const Icon(Icons.edit_outlined),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance.collection('stories').snapshots(),
             builder: (context, snapshot) {
@@ -79,6 +79,7 @@ class _StoryScreenState extends State<StoryScreen> {
               }
 
               final stories = snapshot.data?.docs;
+              print(stories?.length);
 
               return Expanded(
                 child: ListView.builder(
@@ -104,6 +105,7 @@ class _StoryScreenState extends State<StoryScreen> {
                         if (!userStoriesSnapshot.hasData) {
                           return const Text('No user stories available');
                         }
+                        print('of course herrrreee');
 
                         final userStories = userStoriesSnapshot.data?.docs;
 

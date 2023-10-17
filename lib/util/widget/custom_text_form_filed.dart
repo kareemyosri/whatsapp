@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../color.dart';
+import 'package:whatsapp/util/color.dart';
 
 class CustomTextFormFiled extends StatelessWidget {
   const CustomTextFormFiled({
@@ -16,11 +15,12 @@ class CustomTextFormFiled extends StatelessWidget {
   final TextInputType textInputType;
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
       cursorColor: tabColor,
       onChanged: onChanged,
       keyboardType: textInputType,
+      textDirection: TextDirection.ltr,
       style: const TextStyle(color: textColor),
       decoration: InputDecoration(
         hintText: hintText,
