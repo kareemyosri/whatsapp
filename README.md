@@ -1,6 +1,6 @@
 # Chat App
 
-I have recently completed a mobile application project during my internship at Eraasoft. The Chat App, developed using Flutter, is a versatile mobile application that offers a wide range of features to enhance user communication and engagement.
+I have recently completed a mobile application project. The Chat App, developed using Flutter, is a versatile mobile application that offers a wide range of features to enhance user communication and engagement.
 
 ## Features
 - **One-to-one Chat:** Implemented a seamless one-to-one chat feature that allows users to exchange messages with their friends, promoting effective communication.
@@ -18,4 +18,4 @@ I have recently completed a mobile application project during my internship at E
 - **Firebase Authentication:** Integrated Firebase Authentication for secure user registration and login processes.
 
 ## Video URL
-This project can be found on my [GitHub repository](insert-link-here), where you can access the codebase and project details.
+[Google Drive](https://drive.google.com/file/d/1VwnvmOaeF6-EwfLrpRzmIylGq21jmt9h/view?usp=drive_link)
